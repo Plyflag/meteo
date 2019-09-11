@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include "requeteowm.h"
+#include "meteoowm.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -7,32 +8,26 @@
 
 int main(int argc, char *argv[])
 {
-    string ville;
-    string pays;
+    string v;
+    string p;
     string text;
     string reponseXML;
     requeteOWM requete;
+    meteoOWM meteo;
     QCoreApplication a(argc, argv);
 
-    std::cout << "Choisir le pays" << std::endl;
+    std::cout << "Choisir la ville" << std::endl;
     cin >> pays;
     requete.modifierPays(pays);
 
-    std::cout << "Choisir une ville" << std::endl;
+    std::cout << "Choisir le pays" << std::endl;
     cin >> ville;
     requete.modifierVille(ville);
 
     string req = requete.creerRequeteOWM();
     std::cout << req;
 
-    SNClientHTTP clientHTTP;
-    clientHTTP.connexionAuServeurParNomDeDomaine("api.openweathermap.org", 80);
-    clientHTTP.envoyer(req);
-    clientHTTP.recevoir();
-    std::cout << clientHTTP.CorpsReponse();
-    ofstream fichierMeteo;
-    fichierMeteo.open("meteoCourante.xml");
-    fichierMeteo << (clientHTTP.CorpsReponse());
-    fichierMeteo.close();
+    meteo.rechercher(v, p);
     return a.exec();
+
 }

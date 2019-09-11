@@ -11,11 +11,13 @@ private:
     string cle;
 
 public:
-    void modifierVille(string uneVille);
-    void modifierPays(string unPays);
+    inline void modifierVille(string uneVille);
+    inline void modifierPays(string unPays);
     requeteOWM();
     ~requeteOWM();
     string creerRequeteOWM();
 };
+
+
 
 #endif // REQUETEOWM_H
