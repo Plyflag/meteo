@@ -2,32 +2,38 @@
 #include "requeteowm.h"
 #include "meteoowm.h"
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <fstream>
 #include <SNClientHTTP.h>
+using namespace std;
+
+string reponseXML;
 
 int main(int argc, char *argv[])
 {
-    string v;
-    string p;
     string text;
-    string reponseXML;
+    string ville;
+    string pays;
+
+
     requeteOWM requete;
     meteoOWM meteo;
+
     QCoreApplication a(argc, argv);
 
-    std::cout << "Choisir la ville" << std::endl;
-    cin >> pays;
-    requete.modifierPays(pays);
 
-    std::cout << "Choisir le pays" << std::endl;
+    cout << "Choisir la ville" << endl;
     cin >> ville;
-    requete.modifierVille(ville);
+    //ville = "Paris";
 
-    string req = requete.creerRequeteOWM();
-    std::cout << req;
+   cout << "Choisir le pays" << endl;
+    cin >> pays;
+   //pays = "France";
 
-    meteo.rechercher(v, p);
+    meteo.rechercher(ville, pays);
+//    meteo.extraireContenuEntreBalise("temperature", 0);
+//    cout << reponseXML;
     return a.exec();
 
 }

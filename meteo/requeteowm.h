@@ -11,8 +11,8 @@ private:
     string cle;
 
 public:
-    inline void modifierVille(string uneVille);
-    inline void modifierPays(string unPays);
+    inline void modifierVille(string uneVille){ville=uneVille;}
+    inline void modifierPays(string unPays){pays=unPays;}
     requeteOWM();
     ~requeteOWM();
     string creerRequeteOWM();
