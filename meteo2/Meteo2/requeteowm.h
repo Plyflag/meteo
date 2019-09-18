@@ -16,7 +16,6 @@ public:
     requeteOWM();
     ~requeteOWM();
     string creerRequeteOWM();
-    string creerRequeteOWMFutur();
 };
 
 

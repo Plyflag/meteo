@@ -1,4 +1,3 @@
-#include <QCoreApplication>
 #include "requeteowm.h"
 #include "meteoowm.h"
 #include <iostream>
@@ -10,8 +9,9 @@ using namespace std;
 
 string reponseXML;
 
-int main(int argc, char *argv[])
+int main()
 {
+
     string text;
     string ville;
     string pays;
@@ -20,19 +20,18 @@ int main(int argc, char *argv[])
     requeteOWM requete;
     meteoOWM meteo;
 
-    QCoreApplication a(argc, argv);
-
     cout << "Choisir la ville" << endl;
     cin >> ville;
     //ville = "Paris";
 
-    cout << "Choisir le pays" << endl;
+   cout << "Choisir le pays" << endl;
     cin >> pays;
    //pays = "France";
 
     meteo.rechercher(ville, pays);
-//  meteo.extraireContenuEntreBalise("temperature", 0);
-//  cout << reponseXML;
-    return a.exec();
+//    meteo.extraireContenuEntreBalise("temperature", 0);
+//    cout << reponseXML;
 
+    return 0;
 }
+

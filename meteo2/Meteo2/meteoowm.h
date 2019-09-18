@@ -15,16 +15,6 @@ typedef struct {
     string urlicone;
 }ConditionsActuelles;
 
-
-typedef struct {
-    float temp;
-    float tempmax;
-    float tempmin;
-    string ville;
-    string description;
-    string urlicone;
-}ConditionsAVenir;
-
 class meteoOWM
 {
 private :
@@ -33,7 +23,6 @@ private :
     string reponseXML;
     ofstream fichierMeteo;
     ConditionsActuelles Actuellement;
-    ConditionsAVenir previsions[4];
 public:
     meteoOWM();
     void rechercher(string v, string p);
