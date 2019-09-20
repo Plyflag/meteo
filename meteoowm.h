@@ -23,7 +23,6 @@ typedef struct {
     string ville;
     string description;
     string urlicone;
-    string date;
 }ConditionsAVenir;
 
 class meteoOWM
@@ -39,7 +38,6 @@ public:
     meteoOWM();
     void rechercher(string v, string p);
     string extraireContenuEntreBalise(string balise, int positionDepart, string baliseRecherche);
-    string DetailHeure(string dateMeteo);
 };
 
 #endif // METEOOWM_H

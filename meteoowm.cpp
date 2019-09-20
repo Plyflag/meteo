@@ -25,7 +25,7 @@ void meteoOWM::rechercher(string v, string p)
     clientOWM.envoyer(req2);
     clientOWM.recevoir();
     reponseXML = clientOWM.CorpsReponse();
-    //cout << reponseXML << endl;
+    cout << reponseXML << endl;
 
     istringstream(extraireContenuEntreBalise("temperature", 0, "max")) >> Actuellement.tempmax;
     cout << "La temperature maximale est actuellement de : " << Actuellement.tempmax << " degres Celsuis" << endl;
@@ -34,29 +34,21 @@ void meteoOWM::rechercher(string v, string p)
     istringstream(extraireContenuEntreBalise("temperature", 0, "value")) >> Actuellement.temp;
     cout << "La temperature est actuellement de : " << Actuellement.temp << " degres Celsuis \n\r" << endl;
 
-     int pos = reponseXML.find("forecast", 0);
-      pos = reponseXML.find("<time", pos);
-    for(int i = 0; i < 4; i++ )
+
+    for(int i = 0; i < 4; i++)
     {
-        pos = reponseXML.find("<time", pos + 1);
-        istringstream(extraireContenuEntreBalise("temperature", pos, "max")) >> previsions[i].tempmax;
-        cout << "La temperature maximale prevue est de : "<< previsions[i].tempmax << " degres Celsuis " << endl;
-        istringstream(extraireContenuEntreBalise("temperature", pos, "min")) >> previsions[i].tempmin;
-        cout << "La temperature minimale prevue est de : " << previsions[i].tempmin << " degres Celsuis \r\n" << endl;
-
-        previsions[i].date=extraireContenuEntreBalise("time", pos, "to") ;
-        //cout << "La date du : "<< previsions[i].date <<  endl;
-
-       // cout<<"Il est "<<DetailHeure(previsions[i].date);
-       // cout <<  "l'année est : " << DetailHeure(previsions[i].date, annee);
-
-        cout << DetailHeure(reponseXML);
+        //previsions[i].tempmax = istringstream(extraireContenuEntreBalise("temperature", i, "max"));
+        cout << "La temperature maximale est actuellement de : " << previsions[i].tempmax << " degres Celsuis" << endl;
+        istringstream(extraireContenuEntreBalise("temperature", i, "min")) >> previsions[i].tempmin;
+        cout << "La temperature minimale est actuellement de : " << previsions[i].tempmin << " degres Celsuis" << endl;
+        istringstream(extraireContenuEntreBalise("temperature", i, "value")) >> previsions[i].temp;
+        cout << "La temperature est actuellement de : " << previsions[i].temp << " degres Celsuis \r\n" << endl;
     }
 
 
     ofstream fichierMeteo;
-    fichierMeteo.open("meteoAvenir.xml");
-    fichierMeteo << reponseXML;
+    fichierMeteo.open("meteoCourante.xml");
+    fichierMeteo << (clientOWM.CorpsReponse());
     fichierMeteo.close();
 
 }
@@ -65,7 +57,7 @@ string meteoOWM::extraireContenuEntreBalise(string balise, int positionDepart, s
 {
 
     int positionBaliseDepart=reponseXML.find(balise, positionDepart);
-    int positionBaliseFinale=reponseXML.find("<time"+ balise, positionBaliseDepart);
+    int positionBaliseFinale=reponseXML.find("</"+ balise, positionBaliseDepart);
     string chaineBalise=reponseXML.substr(positionBaliseDepart + balise.length(), positionBaliseFinale - positionBaliseDepart - baliseRecherche.length());
 
     baliseRecherche += "=\"";
@@ -75,19 +67,4 @@ string meteoOWM::extraireContenuEntreBalise(string balise, int positionDepart, s
 
     return chaineMot;
     //cout << chaineBalise;
-}
-
-string meteoOWM::DetailHeure(string dateMeteo)
-{
-    string balise = dateMeteo.substr(0, 19);
-    string jour = balise.substr(dateMeteo.find("set", 0));
-    string annee = balise.substr(0, 4);
-    string mois = balise.substr(5, 7);
-
-   // heure=dateMeteo.substr(dateMeteo.find("T", 0)+1,2)+"h";
-  //   annee=dateMeteo.substr(dateMeteo.find("set", posi)+1,4)+"h";
-string TrameFinale = jour + "/" +  mois + "/" + annee;
-    return TrameFinale;
-
-
 }

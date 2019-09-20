@@ -8,7 +8,7 @@
 #include <SNClientHTTP.h>
 using namespace std;
 
-int posBalise = 0;
+string reponseXML;
 
 int main(int argc, char *argv[])
 {
@@ -23,12 +23,12 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     cout << "Choisir la ville" << endl;
-  //  cin >> ville;
-    ville = "Paris";
+    cin >> ville;
+    //ville = "Paris";
 
     cout << "Choisir le pays" << endl;
-    //cin >> pays;
-   pays = "France";
+    cin >> pays;
+   //pays = "France";
 
     meteo.rechercher(ville, pays);
 //  meteo.extraireContenuEntreBalise("temperature", 0);

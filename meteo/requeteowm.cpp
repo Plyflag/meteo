@@ -15,11 +15,11 @@ requeteOWM::~requeteOWM()
 
 string requeteOWM::creerRequeteOWM()
 {
-    string http = "GET /data/2.5/weather?q=" + ville + "," + pays + "&units=metric&appid=" + cle + "&mode=xml HTTP/1.1\r\nHost: api.org\r\nConnection: keep-alive\r\n\r\n";
+    string http = "GET /data/2.5/weather?q=" + ville + "," + pays + "&units=metric&appid=" + cle + "&mode=xml HTTP/1.1\r\nHost: api.openweathermap.org\r\nConnection: keep-alive\r\n\r\n";
     return http;
 }
 
 string requeteOWM::creerRequeteOWMFutur() {
-    string http = "GET /data/2.5/forecast?q=" + ville + "," + pays + "&units=metric&appid=" + cle + "&mode=xml HTTP/1.1\r\nHost: api.org\r\nConnection: keep-alive\r\n\r\n";
+    string http = "GET /data/2.5/forecast?q=" + ville + "," + pays + "&units=metric&appid=" + cle + "&mode=xml HTTP/1.1\r\nHost: api.openweathermap.org\r\nConnection: keep-alive\r\n\r\n";
     return http;
 }
